@@ -38,13 +38,13 @@ int main(int argc, char* argv[]) {
 		int verticesList[vertices];
 
 		for (int currentEdge = 0; currentEdge < edges; currentEdge++) {
-			int vertex1, vertex2;
+			int vertex1, vertex2, edgeWeight;
 			in >> vertex1;
 			in >> vertex2;
-			in >> adjacencyMatrix[vertex1][vertex2];
+			in >> edgeWeight;
 
-			adjacencyMatrix[vertex2][vertex1] =
-					adjacencyMatrix[vertex1][vertex2];
+			adjacencyMatrix[vertex2][vertex1] = edgeWeight;
+			adjacencyMatrix[vertex1][vertex2] = edgeWeight;
 		}
 
 		for (int i = 0; i < vertices; i++) {
@@ -52,11 +52,26 @@ int main(int argc, char* argv[]) {
 		}
 
 		sort(verticesList, verticesList + vertices);
+		int minimumWeight = 9999;
 		do {
-			int source = verticesList[0];
+			int source = 0;
+			int last = vertices - 1;
 			int totalWeight = 0;
+			for (int i = 0; i < vertices - 1; i++) {
+				totalWeight = totalWeight
+						+ adjacencyMatrix[verticesList[i]][verticesList[i + 1]];
+			}
+
+			totalWeight = totalWeight + adjacencyMatrix[last][0];
+
+			if (minimumWeight > totalWeight)
+				minimumWeight = totalWeight;
 
 		} while (std::next_permutation(verticesList, verticesList + vertices));
+
+		cout << "Weight = " << minimumWeight << endl;
+		out << minimumWeight;
+		out << endl;
 	}
 }
 
