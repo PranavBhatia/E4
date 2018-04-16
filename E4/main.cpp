@@ -9,8 +9,6 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#include <limits.h>
-#include <sstream>
 
 using namespace std;
 int main(int argc, char* argv[]) {
@@ -36,8 +34,29 @@ int main(int argc, char* argv[]) {
 		in >> vertices;
 		in >> edges;
 
-		int adjacencyMatrix[vertices][vertices] = {0};
+		int adjacencyMatrix[vertices][vertices] = { 0 };
+		int verticesList[vertices];
 
+		for (int currentEdge = 0; currentEdge < edges; currentEdge++) {
+			int vertex1, vertex2;
+			in >> vertex1;
+			in >> vertex2;
+			in >> adjacencyMatrix[vertex1][vertex2];
+
+			adjacencyMatrix[vertex2][vertex1] =
+					adjacencyMatrix[vertex1][vertex2];
+		}
+
+		for (int i = 0; i < vertices; i++) {
+			verticesList[i] = i;
+		}
+
+		sort(verticesList, verticesList + vertices);
+		do {
+			int source = verticesList[0];
+			int totalWeight = 0;
+
+		} while (std::next_permutation(verticesList, verticesList + vertices));
 	}
 }
 
