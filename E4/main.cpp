@@ -32,10 +32,12 @@ int main(int argc, char* argv[]) {
 	in >> testCases;
 
 	for (int m = 0; m < testCases; m++) {
+		int vertices, edges;
+		in >> vertices;
+		in >> edges;
+
+		int adjacencyMatrix[vertices][vertices] = {0};
 
 	}
 }
-
-
-
 
